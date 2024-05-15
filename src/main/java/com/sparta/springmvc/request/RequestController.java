@@ -36,4 +36,30 @@ public class RequestController {
     public String helloPostRequestParam(@RequestParam String name, @RequestParam int age) {
         return String.format("Hello, @RequestParam. <br> name = %s, age = %d", name, age);
     }
+
+    //POST http://localhost:8080/hello/request/form/model
+    // Body  @ModelAttribute를 사용하면 Body에 들어온 쿼리스트링 방식 데이터를 객체에 매핑해서 가져올 수 있다.
+    // name=Robbie&age=95
+    @PostMapping("form/model")
+    @ResponseBody
+    public String helloRequestBodyForm(@ModelAttribute Star star) {
+        return String.format("Hello, @RequestParam. <br> name = %s, age = %d", star.name, star.age);
+    }
+
+    //GET http://localhost:8080/hello/request/form/param/model?name=Robbie&age=95
+    @GetMapping("/form/param/model")
+    @ResponseBody
+    // @ModelAttribute 생략 가능
+    public String helloRequestParam(/*@ModelAttribute*/ Star star) {
+        return String.format("Hello, @RequestParam. <br> name = %s, age = %d", star.name, star.age);
+    }
+
+    //POST http://localhost:8080/hello/request/form/json
+    // Body
+    // {"name":"Robbie", "age":95}
+    @PostMapping("/form/json")
+    @ResponseBody
+    public String helloPostRequestJson(@RequestBody Star star) {
+        return String.format("Hello, @RequestParam. <br> name = %s, age = %d", star.name, star.age);
+    }
 }
