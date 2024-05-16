@@ -41,23 +41,25 @@ public class ScheduleService {
 
     @Transactional
     public ScheduleResponseDto updateSchedule(Long id, ScheduleRequestDto scheduleRequestDto) {
-        Schedule schedule = scheduleRepository.findByIdIsAndPassword(id, scheduleRequestDto.getPassword()).orElseThrow(
-                () -> new IllegalArgumentException("선택한 일정이 없거나, 비밀번호가 맞지 않습니다.")
-        );
+        Schedule schedule = findScheduleByIdAndPassword(id, scheduleRequestDto.getPassword());
 
         schedule.update(scheduleRequestDto);
 
         return new ScheduleResponseDto(schedule);
     }
 
-    private Schedule findSchedule(Long id){
-        return scheduleRepository.findById(id).orElseThrow(
-                ()-> new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
+
+    public Long deleteSchedule(Long id, String password) {
+        Schedule scedule = findScheduleByIdAndPassword(id, password);
+
+        scheduleRepository.delete(scedule);
+
+        return id;
+    }
+
+    private Schedule findScheduleByIdAndPassword(Long id, String password){
+        return scheduleRepository.findByIdIsAndPassword(id, password).orElseThrow(
+                ()-> new IllegalArgumentException("선택한 일정이 없거나, 비밀번호가 맞지 않습니다.")
         );
     }
-
-    private boolean verifyPassword(Schedule schedule, ScheduleRequestDto scheduleRequestDto){
-        return schedule.getPassword().equals(scheduleRequestDto.getPassword());
-    }
-
 }
