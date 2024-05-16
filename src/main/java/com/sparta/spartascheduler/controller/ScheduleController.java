@@ -24,4 +24,8 @@ public class ScheduleController {
         return scheduleService.createSchedule(scheduleRequestDto);
     }
 
+    @GetMapping("/schedule")
+    public ScheduleResponseDto getSchedule(@RequestParam Long id){
+        return scheduleService.getSchedule(id);
+    }
 }

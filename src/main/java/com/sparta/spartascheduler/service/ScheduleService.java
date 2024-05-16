@@ -7,6 +7,8 @@ import com.sparta.spartascheduler.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
@@ -22,5 +24,12 @@ public class ScheduleService {
         Schedule saved = scheduleRepository.save(schedule);
 
         return new ScheduleResponseDto(saved);
+    }
+
+    public ScheduleResponseDto getSchedule(Long id) {
+        Optional<Schedule> result = scheduleRepository.findById(id);
+        Schedule schedule = result.orElseThrow(() -> new IllegalArgumentException("선택한 일정이 없습니다."));
+
+        return new ScheduleResponseDto(schedule);
     }
 }
