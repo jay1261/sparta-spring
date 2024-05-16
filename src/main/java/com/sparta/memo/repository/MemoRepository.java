@@ -3,11 +3,12 @@ package com.sparta.memo.repository;
 import com.sparta.memo.dto.MemoRequestDto;
 import com.sparta.memo.dto.MemoResponseDto;
 import com.sparta.memo.entity.Memo;
-import com.sparta.memo.service.MemoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +16,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+@Repository
 public class MemoRepository {
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public MemoRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -73,7 +76,6 @@ public class MemoRepository {
     }
 
     public Memo findById(Long id) {
-        MemoService memoService = new MemoService(jdbcTemplate);
         // DB 조회
         String sql = "SELECT * FROM memo WHERE id = ?";
 
@@ -88,7 +90,4 @@ public class MemoRepository {
             }
         }, id);
     }
-
-
-
 }
