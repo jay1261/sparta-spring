@@ -38,7 +38,7 @@ public class PersistenceTest {
         } finally {
             em.close();
         }
-        em.close();
+        emf.close();
     }
 
     @Test
@@ -55,7 +55,7 @@ public class PersistenceTest {
         }finally {
             em.close();
         }
-        em.close();
+        emf.close();
     }
 
     @Test
@@ -71,7 +71,7 @@ public class PersistenceTest {
         }finally {
             em.close();
         }
-        em.close();
+        emf.close();
     }
 
     @Test
@@ -122,7 +122,7 @@ public class PersistenceTest {
         }finally {
             em.close();
         }
-        em.close();
+        emf.close();
     }
 
     @Test
