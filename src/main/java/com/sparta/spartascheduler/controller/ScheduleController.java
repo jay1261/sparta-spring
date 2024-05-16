@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class ScheduleController {
@@ -27,5 +29,10 @@ public class ScheduleController {
     @GetMapping("/schedule")
     public ScheduleResponseDto getSchedule(@RequestParam Long id){
         return scheduleService.getSchedule(id);
+    }
+
+    @GetMapping("/schedules")
+    public List<ScheduleResponseDto> getSchedules(){
+        return scheduleService.getSchedules();
     }
 }
