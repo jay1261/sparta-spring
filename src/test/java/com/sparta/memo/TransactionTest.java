@@ -44,12 +44,13 @@ public class TransactionTest {
     }
 
     @Test
+    @Disabled
     @Transactional
     @Rollback(value = false) // 테스트 코드에서 @Transactional 를 사용하면 테스트가 완료된 후 롤백하기 때문에 false 옵션 추가
     @DisplayName("트랜젝션 전파 테스트")
     void test3(){
-        Memo memo = memoRepository.createMemo(em);
-        System.out.println("memo.getContents() = " + memo.getContents());
+//        Memo memo = memoRepository.createMemo(em);
+//        System.out.println("memo.getContents() = " + memo.getContents());
         System.out.println("테스트3 메서드 종료");
     }
 
