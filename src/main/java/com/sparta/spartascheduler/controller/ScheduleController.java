@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -41,8 +42,8 @@ public class ScheduleController {
         return scheduleService.updateSchedule(id, scheduleRequestDto);
     }
 
-    @DeleteMapping("schedule")
-    public Long deleteSchedule(@RequestParam Long id, @RequestParam String password){
-        return scheduleService.deleteSchedule(id, password);
+    @DeleteMapping("/schedule")
+    public Long deleteSchedule(@RequestParam Long id, @RequestBody Map<String,String> map){
+        return scheduleService.deleteSchedule(id, map.getOrDefault("password", ""));
     }
 }
