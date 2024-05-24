@@ -57,12 +57,12 @@ public class OrderTest {
         // order 객체를 사용하여 고객 정보 조회
         User user = order.getUser();
         System.out.println("user.getName() = " + user.getName());
-        List<Order> orderList = user.getOrderList();
-        for (Order order1 : orderList) {
-            System.out.println(order1.getId());
-            System.out.println(order1.getUser().getName());
-            System.out.println(order1.getFood().getName());
-        }
+//        List<Order> orderList = user.getOrderList();
+//        for (Order order1 : orderList) {
+//            System.out.println(order1.getId());
+//            System.out.println(order1.getUser().getName());
+//            System.out.println(order1.getFood().getName());
+//        }
 
         // order 객체를 사용하여 음식 정보 조회
         Food food = order.getFood();
