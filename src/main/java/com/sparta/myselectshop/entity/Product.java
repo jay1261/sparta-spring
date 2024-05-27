@@ -34,7 +34,7 @@ public class Product extends Timestamped {
     @Column(nullable = false)
     private int myprice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) // 회원정보가 필요할 때만 조인할 수 있도록. (항상 필요한게 아님)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
