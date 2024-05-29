@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Slf4j(topic = "LoggingFilter")
-@Component
+//@Component
 @Order(1) // 필터 체인에서의 순서를 지정할 수 있다.
 public class LoggingFilter implements Filter { // 필터 인터페이스를 구현
     @Override
