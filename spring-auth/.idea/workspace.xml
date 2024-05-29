@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba598bf4-367b-4d39-857a-1e9d128895fc" name="Changes" comment="spring security jwt 로그인">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/forbidden.html" afterDir="false" />
+    <list default="true" id="ba598bf4-367b-4d39-857a-1e9d128895fc" name="Changes" comment="접근 불가 페이지">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/dto/ProductRequestDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/controller/ProductController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +53,8 @@
         <option value="Enum" />
         <option value="JavaScript File" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -197,7 +198,7 @@
       <workItem from="1716858772166" duration="18207000" />
       <workItem from="1716897021312" duration="4323000" />
       <workItem from="1716950047141" duration="734000" />
-      <workItem from="1716950829101" duration="10343000" />
+      <workItem from="1716950829101" duration="11082000" />
     </task>
     <task id="LOCAL-00001" summary="회원가입 구현">
       <option name="closed" value="true" />
@@ -239,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716969934653</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="접근 불가 페이지">
+      <option name="closed" value="true" />
+      <created>1716970761345</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716970761345</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +260,7 @@
     <MESSAGE value="filter" />
     <MESSAGE value="Spring security 로그인" />
     <MESSAGE value="spring security jwt 로그인" />
-    <option name="LAST_COMMIT_MESSAGE" value="spring security jwt 로그인" />
+    <MESSAGE value="접근 불가 페이지" />
+    <option name="LAST_COMMIT_MESSAGE" value="접근 불가 페이지" />
   </component>
 </project>
