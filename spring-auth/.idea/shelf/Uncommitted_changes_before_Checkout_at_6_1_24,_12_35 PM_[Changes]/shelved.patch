@@ -1,0 +1,108 @@
+Index: src/main/java/com/sparta/springauth/controller/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.sparta.springauth.controller;\n\nimport com.sparta.springauth.dto.LoginRequestDto;\nimport com.sparta.springauth.dto.SignupRequestDto;\nimport com.sparta.springauth.service.UserService;\nimport jakarta.servlet.http.HttpServletResponse;\nimport jakarta.validation.Valid;\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.stereotype.Controller;\nimport org.springframework.validation.BindingResult;\nimport org.springframework.validation.FieldError;\nimport org.springframework.web.bind.annotation.GetMapping;\nimport org.springframework.web.bind.annotation.PostMapping;\nimport org.springframework.web.bind.annotation.RequestMapping;\n\nimport java.util.List;\n\n@Slf4j\n@Controller\n@RequestMapping(\"/api\")\npublic class UserController {\n\n    private final UserService userService;\n\n    public UserController(UserService userService) {\n        this.userService = userService;\n    }\n\n    @GetMapping(\"/user/login-page\")\n    public String loginPage() {\n        return \"login\";\n    }\n\n    @GetMapping(\"/user/signup\")\n    public String signupPage() {\n        return \"signup\";\n    }\n\n    @PostMapping(\"/user/signup\")\n    public String signup(@Valid SignupRequestDto requestDto, BindingResult bindingResult) {\n        // Validation 예외처리\n        // 예외가 발생하면 BindingResult 객체에 오류에 대한 정보가 담겨서 들어온다.\n        List<FieldError> fieldErrors = bindingResult.getFieldErrors();\n        if (fieldErrors.size() > 0) {\n            for (FieldError fieldError : bindingResult.getFieldErrors()) {\n                log.error(fieldError.getField() + \" 필드 : \" + fieldError.getDefaultMessage());\n            }\n            return \"redirect:/api/user/signup\";\n        }\n\n        userService.signup(requestDto);\n\n        return \"redirect:/api/user/login-page\";\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/sparta/springauth/controller/UserController.java b/src/main/java/com/sparta/springauth/controller/UserController.java
+--- a/src/main/java/com/sparta/springauth/controller/UserController.java	
++++ b/src/main/java/com/sparta/springauth/controller/UserController.java	
+@@ -9,6 +9,7 @@
+ import org.springframework.stereotype.Controller;
+ import org.springframework.validation.BindingResult;
+ import org.springframework.validation.FieldError;
++import org.springframework.validation.annotation.Validated;
+ import org.springframework.web.bind.annotation.GetMapping;
+ import org.springframework.web.bind.annotation.PostMapping;
+ import org.springframework.web.bind.annotation.RequestMapping;
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"ba598bf4-367b-4d39-857a-1e9d128895fc\" name=\"Changes\" comment=\"데이터 검증하기 (validation)\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/sparta/springauth/controller/UserController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/sparta/springauth/controller/UserController.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/sparta/springauth/dto/SignupRequestDto.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/sparta/springauth/dto/SignupRequestDto.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ExternalProjectsData\">\n    <projectState path=\"$PROJECT_DIR$\">\n      <ProjectState />\n    </projectState>\n  </component>\n  <component name=\"ExternalProjectsManager\">\n    <system id=\"GRADLE\">\n      <state>\n        <task path=\"$PROJECT_DIR$\">\n          <activation />\n        </task>\n        <projects_view>\n          <tree_state>\n            <expand>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"spring-auth\" type=\"f1a62948:ProjectNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"spring-auth\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"Run Configurations\" type=\"7b0102dc:RunConfigurationsNode\" />\n              </path>\n            </expand>\n            <select />\n          </tree_state>\n        </projects_view>\n      </state>\n    </system>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Interface\" />\n        <option value=\"Enum\" />\n        <option value=\"JavaScript File\" />\n        <option value=\"CSS File\" />\n        <option value=\"HTML File\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 7\n}</component>\n  <component name=\"ProjectId\" id=\"2gl9XppqIzhABH6rnNOmGaJ1Qd3\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"DefaultHtmlFileTemplate\": \"HTML File\",\n    \"Gradle.BeanTest.test1.executor\": \"Run\",\n    \"Gradle.Build spring-auth.executor\": \"Run\",\n    \"Gradle.PasswordEncoderTest.test1.executor\": \"Run\",\n    \"RequestMappingsPanelOrder0\": \"0\",\n    \"RequestMappingsPanelOrder1\": \"1\",\n    \"RequestMappingsPanelWidth0\": \"75\",\n    \"RequestMappingsPanelWidth1\": \"75\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\n    \"Spring Boot.SpringAuthApplication.executor\": \"Run\",\n    \"git-widget-placeholder\": \"main\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"last_opened_file_path\": \"/Users/jay/sparta/spring/spring-auth\",\n    \"list.type.of.created.stylesheet\": \"CSS\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  },\n  \"keyToStringList\": {\n    \"DatabaseDriversLRU\": [\n      \"mysql\"\n    ]\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CreateClassDialog.RecentsKey\">\n      <recent name=\"com.sparta.springauth.dto\" />\n      <recent name=\"com.sparta.springauth.repository\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/src/main/resources/static/js\" />\n      <recent name=\"$PROJECT_DIR$/src/main/resources/static/css\" />\n      <recent name=\"$PROJECT_DIR$/src/main/resources/static\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Spring Boot.SpringAuthApplication\">\n    <configuration name=\"BeanTest.test1\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\n      <ExternalSystemSettings>\n        <option name=\"executionName\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\n        <option name=\"scriptParameters\" value=\"\" />\n        <option name=\"taskDescriptions\">\n          <list />\n        </option>\n        <option name=\"taskNames\">\n          <list>\n            <option value=\":test\" />\n            <option value=\"--tests\" />\n            <option value=\"&quot;com.sparta.springauth.BeanTest.test1&quot;\" />\n          </list>\n        </option>\n        <option name=\"vmOptions\" />\n      </ExternalSystemSettings>\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\n      <DebugAllEnabled>false</DebugAllEnabled>\n      <RunAsTest>true</RunAsTest>\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"PasswordEncoderTest.test1\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\n      <ExternalSystemSettings>\n        <option name=\"executionName\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\n        <option name=\"scriptParameters\" value=\"\" />\n        <option name=\"taskDescriptions\">\n          <list />\n        </option>\n        <option name=\"taskNames\">\n          <list>\n            <option value=\":test\" />\n            <option value=\"--tests\" />\n            <option value=\"&quot;com.sparta.springauth.PasswordEncoderTest.test1&quot;\" />\n          </list>\n        </option>\n        <option name=\"vmOptions\" />\n      </ExternalSystemSettings>\n      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\n      <DebugAllEnabled>false</DebugAllEnabled>\n      <RunAsTest>true</RunAsTest>\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"SpringAuthApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\n      <module name=\"spring-auth.main\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.sparta.springauth.SpringAuthApplication\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Gradle.BeanTest.test1\" />\n        <item itemvalue=\"Gradle.PasswordEncoderTest.test1\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a\" />\n        <option value=\"jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"ba598bf4-367b-4d39-857a-1e9d128895fc\" name=\"Changes\" comment=\"\" />\n      <created>1716261342486</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1716261342486</updated>\n      <workItem from=\"1716261343581\" duration=\"23000000\" />\n      <workItem from=\"1716858772166\" duration=\"18207000\" />\n      <workItem from=\"1716897021312\" duration=\"4323000\" />\n      <workItem from=\"1716950047141\" duration=\"734000\" />\n      <workItem from=\"1716950829101\" duration=\"11489000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"회원가입 구현\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716872801537</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716872801537</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"로그인 구현 jwt\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716876772166</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716876772166</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"filter\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716891290270</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716891290270</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Spring security 로그인\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716966177002</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716966177002</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"spring security jwt 로그인\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716969934653</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716969934653</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"접근 불가 페이지\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716970761345</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716970761345</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"데이터 검증하기 (validation)\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1716971367647</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1716971367647</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"8\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"회원가입 구현\" />\n    <MESSAGE value=\"로그인 구현 jwt\" />\n    <MESSAGE value=\"filter\" />\n    <MESSAGE value=\"Spring security 로그인\" />\n    <MESSAGE value=\"spring security jwt 로그인\" />\n    <MESSAGE value=\"접근 불가 페이지\" />\n    <MESSAGE value=\"데이터 검증하기 (validation)\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"데이터 검증하기 (validation)\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,10 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ba598bf4-367b-4d39-857a-1e9d128895fc" name="Changes" comment="데이터 검증하기 (validation)">
++    <list default="true" id="ba598bf4-367b-4d39-857a-1e9d128895fc" name="Changes" comment="validation 예외처리">
++      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/controller/UserController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/dto/SignupRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sparta/springauth/dto/SignupRequestDto.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/basic.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/basic.js" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -71,37 +72,37 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "DefaultHtmlFileTemplate": "HTML File",
+-    "Gradle.BeanTest.test1.executor": "Run",
+-    "Gradle.Build spring-auth.executor": "Run",
+-    "Gradle.PasswordEncoderTest.test1.executor": "Run",
+-    "RequestMappingsPanelOrder0": "0",
+-    "RequestMappingsPanelOrder1": "1",
+-    "RequestMappingsPanelWidth0": "75",
+-    "RequestMappingsPanelWidth1": "75",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "Spring Boot.SpringAuthApplication.executor": "Run",
+-    "git-widget-placeholder": "main",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "/Users/jay/sparta/spring/spring-auth",
+-    "list.type.of.created.stylesheet": "CSS",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
++    &quot;Gradle.BeanTest.test1.executor&quot;: &quot;Run&quot;,
++    &quot;Gradle.Build spring-auth.executor&quot;: &quot;Run&quot;,
++    &quot;Gradle.PasswordEncoderTest.test1.executor&quot;: &quot;Run&quot;,
++    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
++    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
++    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
++    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;Spring Boot.SpringAuthApplication.executor&quot;: &quot;Run&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/Users/jay/sparta/spring/spring-auth&quot;,
++    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   },
+-  "keyToStringList": {
+-    "DatabaseDriversLRU": [
+-      "mysql"
++  &quot;keyToStringList&quot;: {
++    &quot;DatabaseDriversLRU&quot;: [
++      &quot;mysql&quot;
+     ]
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CreateClassDialog.RecentsKey">
+       <recent name="com.sparta.springauth.dto" />
