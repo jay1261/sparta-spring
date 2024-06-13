@@ -1,0 +1,21 @@
+Index: ../spring-auth/src/main/resources/static/js/basic.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>let host = 'http://' + window.location.host;\n\n$(document).ready(function () {\n    const auth = getToken();\n    if(auth === '') {\n        window.location.href = host + \"/api/user/login-page\";\n    } else {\n        $('#login-true').show();\n        $('#login-false').hide();\n    }\n})\n\nfunction logout() {\n    // 토큰 삭제\n    Cookies.remove('Authorization', { path: '/' });\n    window.location.href = host + \"/api/user/login-page\";\n}\n\nfunction getToken() {\n    let auth = Cookies.get('Authorization');\n\n    if(auth === undefined) {\n        return '';\n    }\n\n    return auth;\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../spring-auth/src/main/resources/static/js/basic.js b/../spring-auth/src/main/resources/static/js/basic.js
+--- a/../spring-auth/src/main/resources/static/js/basic.js	
++++ b/../spring-auth/src/main/resources/static/js/basic.js	
+@@ -3,7 +3,9 @@
+ $(document).ready(function () {
+     const auth = getToken();
+     if(auth === '') {
+-        window.location.href = host + "/api/user/login-page";
++        $('#login-true').show();
++        $('#login-false').hide();
++        // window.location.href = host + "/api/user/login-page";
+     } else {
+         $('#login-true').show();
+         $('#login-false').hide();
