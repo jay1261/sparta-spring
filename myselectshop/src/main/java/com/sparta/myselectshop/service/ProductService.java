@@ -16,8 +16,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,8 +25,9 @@ public class ProductService {
     public static final int MIN_MY_PRICE = 100;
 
     private final ProductRepository productRepository;
-    private final FolderRepository folderRepository;
     private final ProductFolderRepository productFolderRepository;
+    private final FolderRepository folderRepository;
+
 
     public ProductResponseDto createProduct(ProductRequestDto requestDto, User user) {
         Product product = productRepository.save(new Product(requestDto, user));
